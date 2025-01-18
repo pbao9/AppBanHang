@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         height: 40,
         marginVertical: 10,
-        width: '100%', // Đảm bảo SearchInput tràn hết chiều ngang
+        width: '100%',
     },
     input: {
         flex: 1,

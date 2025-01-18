@@ -1,6 +1,12 @@
 import React from 'react'
 import { Tabs } from 'expo-router'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    StyleSheet,
+    Platform,
+} from 'react-native'
 import Feather from '@expo/vector-icons/Feather'
 import { TabBar } from '@/components/TabBar'
 import SearchInput from '@/components/SearchInput'
@@ -12,7 +18,10 @@ export default function TabLayout() {
             screenOptions={{
                 headerShown: true,
                 headerTitle: () => (
-                    <View className="flex flex-row items-center">
+                    <View
+                        className="flex flex-row items-center"
+                        style={styles.custom}
+                    >
                         <SearchInput />
                     </View>
                 ),
@@ -24,3 +33,9 @@ export default function TabLayout() {
         </Tabs>
     )
 }
+
+const styles = StyleSheet.create({
+    custom: {
+        marginBottom: Platform.OS === 'ios' ? 10 : 0,
+    },
+})

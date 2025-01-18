@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         height: 180,
+        marginBottom: 20,
     },
     wrapper: {
         height: '100%',
