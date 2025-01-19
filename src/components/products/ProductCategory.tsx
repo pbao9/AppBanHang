@@ -9,6 +9,7 @@ import {
     ActivityIndicator,
 } from 'react-native'
 import Feather from '@expo/vector-icons/Feather'
+import { fetchProductsByCategory } from '../../services/Product/ProductService'
 
 interface Product {
     id: number
@@ -26,11 +27,9 @@ const ProductCategory = ({ category }: { category: string }) => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch(
-                    `https://dummyjson.com/products/category/${category}`
-                )
-                const data = await response.json()
-                setProducts(data.products.slice(0, 12))
+                setLoading(true)
+                const data = await fetchProductsByCategory(category)
+                setProducts(data.slice(0, 8))
             } catch (error) {
                 console.error(error)
             } finally {
@@ -39,7 +38,7 @@ const ProductCategory = ({ category }: { category: string }) => {
         }
 
         fetchProducts()
-    }, [])
+    }, [category])
 
     const windowWidth = Dimensions.get('window').width
 

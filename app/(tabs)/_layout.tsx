@@ -8,8 +8,8 @@ import {
     Platform,
 } from 'react-native'
 import Feather from '@expo/vector-icons/Feather'
-import { TabBar } from '@/components/TabBar'
-import SearchInput from '@/components/SearchInput'
+import { TabBar } from '@/src/components/TabBar'
+import SearchInput from '@/src/components/SearchInput'
 
 export default function TabLayout() {
     return (

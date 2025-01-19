@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import {
     View,
     Text,
@@ -9,6 +9,7 @@ import {
     TouchableOpacity,
 } from 'react-native'
 import Feather from '@expo/vector-icons/Feather'
+import { fetchProducts } from '../../services/Product/ProductService'
 
 interface Product {
     id: number
@@ -19,41 +20,60 @@ interface Product {
     rating: number
 }
 
+const ProductItem = React.memo(({ item }: { item: Product }) => (
+    <View style={styles.productCard}>
+        <Image source={{ uri: item.thumbnail }} style={styles.productImage} />
+        <View style={styles.productDetails}>
+            <Text style={styles.productTitle}>{item.title}</Text>
+            <View style={styles.productRating}>
+                <Text>{item.rating}/5</Text>
+                <Feather
+                    name="star"
+                    color="orange"
+                    size={14}
+                    style={{ marginLeft: 4 }}
+                />
+            </View>
+            <View style={styles.productFooter}>
+                <Text style={styles.productPrice}>${item.price}</Text>
+                <TouchableOpacity style={styles.infoButton}>
+                    <Feather name="info" size={14} color="#007BFF" />
+                </TouchableOpacity>
+            </View>
+        </View>
+    </View>
+))
+
 const ProductList = () => {
     const [products, setProducts] = useState<Product[]>([])
     const [loading, setLoading] = useState(true)
-    const [loadingMore, setLoadingMore] = useState(false) // Trạng thái loading cho việc tải thêm sản phẩm
+    const [loadingMore, setLoadingMore] = useState(false)
     const [page, setPage] = useState(1)
     const [hasMore, setHasMore] = useState(true)
 
-    const fetchProducts = async (page: number) => {
+    const loadProducts = useCallback(async () => {
         try {
-            const response = await fetch(
-                `https://dummyjson.com/products?limit=12&skip=${
-                    (page - 1) * 12
-                }`
-            )
-            const data = await response.json()
-            if (data.products.length < 12) {
+            const data = await fetchProducts(page, 12)
+            if (data.length < 12) {
                 setHasMore(false)
             }
-            setProducts((prevProducts) => [...prevProducts, ...data.products])
+            setProducts((prevProducts) => [...prevProducts, ...data])
         } catch (error) {
-            console.error(error)
+            console.error('Error fetching products:', error)
         } finally {
             setLoading(false)
-            setLoadingMore(false) // Đảm bảo rằng việc tải thêm kết thúc
+            setLoadingMore(false)
         }
-    }
+    }, [page])
 
     useEffect(() => {
-        fetchProducts(page)
-    }, [page])
+        loadProducts()
+    }, [page, loadProducts])
 
     const loadMoreData = () => {
         if (!loadingMore && hasMore) {
-            setLoadingMore(true) // Đánh dấu là đang tải thêm
-            setPage(page + 1)
+            setLoadingMore(true)
+            setPage((prevPage) => prevPage + 1)
         }
     }
 
@@ -65,43 +85,18 @@ const ProductList = () => {
         )
     }
 
-    const renderItem = ({ item }: { item: Product }) => (
-        <View style={styles.productCard}>
-            <Image
-                source={{ uri: item.thumbnail }}
-                style={styles.productImage}
-            />
-            <View style={styles.productDetails}>
-                <Text style={styles.productTitle}>{item.title}</Text>
-                <View style={styles.productRating}>
-                    <Text>{item.rating}/5</Text>
-                    <Feather
-                        name="star"
-                        color={'orange'}
-                        size={14}
-                        style={{ marginLeft: 4 }}
-                    />
-                </View>
-                <View style={styles.productFooter}>
-                    <Text style={styles.productPrice}>${item.price}</Text>
-                    <TouchableOpacity style={styles.infoButton}>
-                        <Feather name="info" size={14} color="#007BFF" />
-                    </TouchableOpacity>
-                </View>
-            </View>
-        </View>
-    )
-
     return (
         <FlatList
             data={products}
-            renderItem={renderItem}
+            renderItem={({ item }) => <ProductItem item={item} />}
             keyExtractor={(item) => item.id.toString()}
             numColumns={2}
             contentContainerStyle={styles.container}
             showsVerticalScrollIndicator={false}
             onEndReached={loadMoreData}
             onEndReachedThreshold={0.5}
+            initialNumToRender={10}
+            maxToRenderPerBatch={20}
             ListFooterComponent={
                 loadingMore ? (
                     <View style={styles.footerLoader}>

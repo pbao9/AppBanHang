@@ -1,7 +1,7 @@
-import Card from '@/components/Card'
-import ProductCategory from '@/components/products/ProductCategory'
-import ProductList from '@/components/products/ProductList'
-import Slider from '@/components/slider/Slider'
+import Card from '@/src/components/Card'
+import ProductCategory from '@/src/components/products/ProductCategory'
+import ProductList from '@/src/components/products/ProductList'
+import Slider from '@/src/components/slider/Slider'
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native'
 export default function Page() {
     const sections = [

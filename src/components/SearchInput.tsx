@@ -4,19 +4,29 @@ import Feather from '@expo/vector-icons/Feather'
 
 const SearchInput = () => {
     return (
-        <View style={styles.container}>
-            <TextInput
-                style={styles.input}
-                placeholder="Tìm kiếm..."
-                placeholderTextColor="#999"
-            />
+        <>
+            <View style={styles.container}>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Tìm kiếm..."
+                    placeholderTextColor="#999"
+                />
+                <Feather
+                    name="search"
+                    size={20}
+                    color="#673ab7"
+                    style={styles.icon}
+                />
+            </View>
             <Feather
-                name="search"
+                name="bell"
                 size={20}
-                color="#673ab7"
-                style={styles.icon}
+                color={'#673ab7'}
+                style={{
+                    paddingHorizontal: 15,
+                }}
             />
-        </View>
+        </>
     )
 }
 
@@ -29,7 +39,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         height: 40,
         marginVertical: 10,
-        width: '100%',
+        width: '90%',
     },
     input: {
         flex: 1,

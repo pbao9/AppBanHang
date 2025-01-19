@@ -11,22 +11,22 @@ interface SliderImage {
 const images: SliderImage[] = [
     {
         id: 1,
-        asset: require('../../assets/images/banner_1.png'),
+        asset: require('../../../assets/images/banner_1.png'),
         title: 'Image 1',
     },
     {
         id: 2,
-        asset: require('../../assets/images/banner_2.png'),
+        asset: require('../../../assets/images/banner_2.png'),
         title: 'Image 2',
     },
     {
         id: 3,
-        asset: require('../../assets/images/banner_3.png'),
+        asset: require('../../../assets/images/banner_3.png'),
         title: 'Image 3',
     },
     {
         id: 4,
-        asset: require('../../assets/images/banner_4.png'),
+        asset: require('../../../assets/images/banner_4.png'),
         title: 'Image 4',
     },
 ]
