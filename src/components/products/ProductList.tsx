@@ -10,6 +10,7 @@ import {
 } from 'react-native'
 import Feather from '@expo/vector-icons/Feather'
 import { fetchProducts } from '../../services/Product/ProductService'
+import { Link } from 'expo-router'
 
 interface Product {
     id: number
@@ -22,25 +23,30 @@ interface Product {
 
 const ProductItem = React.memo(({ item }: { item: Product }) => (
     <View style={styles.productCard}>
-        <Image source={{ uri: item.thumbnail }} style={styles.productImage} />
-        <View style={styles.productDetails}>
-            <Text style={styles.productTitle}>{item.title}</Text>
-            <View style={styles.productRating}>
-                <Text>{item.rating}/5</Text>
-                <Feather
-                    name="star"
-                    color="orange"
-                    size={14}
-                    style={{ marginLeft: 4 }}
-                />
+        <Link href={`/Products/ProductDetail?id=${item.id}`}>
+            <Image
+                source={{ uri: item.thumbnail }}
+                style={styles.productImage}
+            />
+            <View style={styles.productDetails}>
+                <Text style={styles.productTitle}>{item.title}</Text>
+                <View style={styles.productRating}>
+                    <Text>{item.rating}/5</Text>
+                    <Feather
+                        name="star"
+                        color="orange"
+                        size={14}
+                        style={{ marginLeft: 4 }}
+                    />
+                </View>
+                <View style={styles.productFooter}>
+                    <Text style={styles.productPrice}>${item.price}</Text>
+                    <TouchableOpacity style={styles.infoButton}>
+                        <Feather name="info" size={14} color="#007BFF" />
+                    </TouchableOpacity>
+                </View>
             </View>
-            <View style={styles.productFooter}>
-                <Text style={styles.productPrice}>${item.price}</Text>
-                <TouchableOpacity style={styles.infoButton}>
-                    <Feather name="info" size={14} color="#007BFF" />
-                </TouchableOpacity>
-            </View>
-        </View>
+        </Link>
     </View>
 ))
 
