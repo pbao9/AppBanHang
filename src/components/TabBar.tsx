@@ -41,7 +41,7 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
                     animatedStyle,
                     {
                         position: 'absolute',
-                        backgroundColor: '#723FEB',
+                        backgroundColor: '#4A90E2',
                         borderRadius: 30,
                         marginHorizontal: 12,
                         height: dimensions.height - 15,

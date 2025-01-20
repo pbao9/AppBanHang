@@ -1,4 +1,5 @@
 import Card from '@/src/components/Card'
+import CategoryList from '@/src/components/products/categories/CategoryList'
 import ProductCategory from '@/src/components/products/ProductCategory'
 import ProductList from '@/src/components/products/ProductList'
 import Slider from '@/src/components/slider/Slider'
@@ -27,6 +28,10 @@ export default function Page() {
     const renderHeader = () => (
         <>
             <Slider />
+            <View style={styles.section}>
+                <Text style={styles.title}>Danh mục sản phẩm</Text>
+                <CategoryList />
+            </View>
         </>
     )
 
@@ -36,7 +41,7 @@ export default function Page() {
             renderItem={renderItem}
             keyExtractor={(item) => item.id}
             showsVerticalScrollIndicator={false}
-            ListHeaderComponent={renderHeader} // Add the header (Slider and Image)
+            ListHeaderComponent={renderHeader}
             style={styles.container}
         />
     )
@@ -49,6 +54,7 @@ const styles = StyleSheet.create({
     },
     section: {
         padding: 16,
+        marginHorizontal: 10,
         marginBottom: 24,
         backgroundColor: '#fff',
         borderRadius: 8,

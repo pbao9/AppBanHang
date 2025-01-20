@@ -71,7 +71,7 @@ const TabBarButton = ({
 
             <Animated.Text
                 style={[
-                    { color: isFocused ? '#673ab7' : '#222', fontSize: 12 },
+                    { color: isFocused ? '#4A90E2' : '#222', fontSize: 12 },
                     animatedTextStyle,
                 ]}
             >

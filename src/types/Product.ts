@@ -6,4 +6,13 @@ export default interface Product {
     thumbnail: string
     rating: number
     images: any
+    brand: string
+    sku: string
+    weight: number
+    returnPolicy: string
+    stock: number
+    tags: any
+    category: string
+    discountPercentage: number
+    minimumOrderQuantity: number
 }

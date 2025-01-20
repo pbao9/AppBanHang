@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Product from '@/src/types/Product'
+import Category from '@/src/types/Category'
 
 interface ProductResponse {
     products: Product[]
@@ -53,5 +54,15 @@ export const fetchProductById = async (id: number): Promise<Product> => {
     } catch (err) {
         console.error(`Error fetching product by ID (${id})`, err)
         throw err
+    }
+}
+
+export const fetchProductCategoryList = async (): Promise<Category[]> => {
+    try {
+        const response = await api.get<Category[]>(`/products/categories`)
+        return response.data
+    } catch (error) {
+        console.error('Error fetching product category list:', error)
+        throw error
     }
 }

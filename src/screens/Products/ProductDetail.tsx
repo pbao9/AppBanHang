@@ -1,11 +1,18 @@
 // ProductDetail.tsx
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native'
+import {
+    View,
+    Text,
+    StyleSheet,
+    ActivityIndicator,
+    SafeAreaView,
+} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'expo-router/build/hooks'
 import Product from '@/src/types/Product'
 import { fetchProductById } from '@/src/services/Product/ProductService'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import ProductInfo from '@/src/components/products/ProductInfo'
+import Topbar from '@/src/components/partials/Topbar'
 
 const ProductDetail = () => {
     const params = useSearchParams()
@@ -41,22 +48,39 @@ const ProductDetail = () => {
 
     if (!product) {
         return (
-            <View className="flex justify-center items-center p-16">
-                <ActivityIndicator size="large" color="#007BFF" />
+            <View>
+                <ActivityIndicator
+                    size="large"
+                    color=""
+                    style={styles.center}
+                />
             </View>
         )
     }
 
     return (
-        <View className="w-full min-h-screen" style={styles.container}>
-            <ProductInfo product={product} />
-        </View>
+        <SafeAreaView>
+            <View className="w-full min-h-screen" style={styles.container}>
+                <View style={styles.productInfo}>
+                    <ProductInfo product={product} />
+                </View>
+            </View>
+        </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
+    center: {
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     container: {
-        padding: 16,
+        backgroundColor: 'white',
+    },
+    productInfo: {
+        height: '100%',
     },
 })
 export default ProductDetail

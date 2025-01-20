@@ -44,7 +44,7 @@ const Slider = () => {
                 loop={true}
                 showsPagination={true}
                 dotColor="rgba(0, 0, 0, 0.2)"
-                activeDotColor="#673ab7"
+                activeDotColor="#fff"
             >
                 {images.map((item) => (
                     <View key={item.id} style={styles.sliderItem}>

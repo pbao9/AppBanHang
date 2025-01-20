@@ -14,14 +14,14 @@ const SearchInput = () => {
                 <Feather
                     name="search"
                     size={20}
-                    color="#673ab7"
+                    color="#4A90E2"
                     style={styles.icon}
                 />
             </View>
             <Feather
                 name="bell"
                 size={20}
-                color={'#673ab7'}
+                color={'#4A90E2'}
                 style={{
                     paddingHorizontal: 15,
                 }}
