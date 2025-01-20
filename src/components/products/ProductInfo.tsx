@@ -7,6 +7,8 @@ import {
     Image,
     Button,
     TouchableOpacity,
+    ScrollView,
+    Platform,
 } from 'react-native'
 import Product from '@/src/types/Product'
 import Topbar from '../partials/Topbar'
@@ -24,7 +26,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
         : product.images
     const navigation = useNavigation()
     return (
-        <View style={styles.container}>
+        <ScrollView>
             <Topbar title={product.title} />
             <Image source={{ uri: imageUrl }} style={styles.image} />
             <View style={styles.content}>
@@ -46,11 +48,32 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
                         icon="box"
                         data={product.minimumOrderQuantity}
                     />
+                    <Badge
+                        title="QuAnh"
+                        icon="box"
+                        data={product.minimumOrderQuantity}
+                    />
+                    <Badge
+                        title="Stock"
+                        icon="box"
+                        data={product.minimumOrderQuantity}
+                    />
+                    <Badge
+                        title="Hel"
+                        icon="box"
+                        data={product.minimumOrderQuantity}
+                    />
                 </View>
                 <Text style={styles.description}>{product.description}</Text>
-                <Text style={styles.button}>${product.price}</Text>
+                <View
+                    className="flex justify-between flex-row"
+                    style={styles.containerFlex}
+                >
+                    <Text style={styles.button}>Liên hệ</Text>
+                    <Text style={styles.button}>${product.price}</Text>
+                </View>
             </View>
-        </View>
+        </ScrollView>
     )
 }
 
@@ -70,7 +93,9 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         gap: 10,
-        justifyContent: 'space-around',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        justifyContent: 'space-between',
         paddingVertical: 15,
     },
 
@@ -80,8 +105,15 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
     },
+    containerFlex: {
+        flex: 1,
+        backgroundColor: 'red',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
     content: {
-        marginTop: 165,
+        marginTop: Platform.OS === 'ios' ? 110 : 140,
         padding: 25,
     },
     title: {
@@ -101,10 +133,10 @@ const styles = StyleSheet.create({
     image: {
         width: '100%',
         objectFit: 'contain',
-        height: 250,
+        height: 270,
         marginBottom: 0,
         position: 'absolute',
-        backgroundColor: '#4A90E2',
+        backgroundColor: 'red',
     },
     button: {
         padding: 10,

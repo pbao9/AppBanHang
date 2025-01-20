@@ -5,6 +5,7 @@ import {
     StyleSheet,
     ActivityIndicator,
     SafeAreaView,
+    StatusBar,
 } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'expo-router/build/hooks'
@@ -59,13 +60,18 @@ const ProductDetail = () => {
     }
 
     return (
-        <SafeAreaView>
+        <>
+            <StatusBar
+                translucent
+                backgroundColor="transparent"
+                barStyle="light-content"
+            />
             <View className="w-full min-h-screen" style={styles.container}>
                 <View style={styles.productInfo}>
                     <ProductInfo product={product} />
                 </View>
             </View>
-        </SafeAreaView>
+        </>
     )
 }
 

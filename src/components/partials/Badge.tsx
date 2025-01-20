@@ -7,7 +7,7 @@ const Badge = ({
     title,
     data,
 }: {
-    icon: string
+    icon: keyof typeof Feather.glyphMap
     title: string
     data: any
 }) => {
@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         gap: 10,
+        flexWrap: 'wrap',
         justifyContent: 'space-around',
         paddingVertical: 15,
     },

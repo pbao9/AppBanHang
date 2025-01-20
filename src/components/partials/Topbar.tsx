@@ -1,5 +1,11 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import {
+    View,
+    Text,
+    StyleSheet,
+    TouchableOpacity,
+    Platform,
+} from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import Feather from '@expo/vector-icons/Feather'
 
@@ -52,7 +58,7 @@ const styles = StyleSheet.create({
     },
     headerContainer: {
         zIndex: 999,
-        height: 90,
+        height: Platform.OS === 'ios' ? 150 : 120,
         width: '100%',
         paddingVertical: 15,
         paddingHorizontal: 15,
