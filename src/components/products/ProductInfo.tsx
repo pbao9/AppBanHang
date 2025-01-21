@@ -139,6 +139,7 @@ const styles = StyleSheet.create({
     image: {
         width: '100%',
         height: 270,
+        objectFit: 'contain',
         position: 'absolute',
         backgroundColor: '#4A90E2',
     },
