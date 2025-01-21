@@ -47,8 +47,8 @@ yarn start
 <ul>
     <li>
          Tìm kiếm sản phẩm: Người dùng có thể tìm kiếm các sản phẩm dựa trên từ khóa.
-    <li>
+    </li>
     <li>
         Hiển thị chi tiết sản phẩm: Khi người dùng chọn một sản phẩm, ứng dụng sẽ hiển thị chi tiết thông tin sản phẩm như tên, giá cả, xếp hạng và hình ảnh.
-    <li>
+    </li>
 </ul>
