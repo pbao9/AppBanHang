@@ -15,4 +15,13 @@ export default interface Product {
     category: string
     discountPercentage: number
     minimumOrderQuantity: number
+    reviews: Review[]
+}
+
+export interface Review {
+    rating: number
+    comment: string
+    date: string
+    reviewerName: string
+    reviewerEmail: string
 }

@@ -27,7 +27,7 @@ const Topbar = ({ title }: { title: string }) => {
             </TouchableOpacity>
             <View style={styles.conner}>
                 <Feather
-                    name="info"
+                    name="alert-octagon"
                     size={24}
                     color="black"
                     style={styles.icon}

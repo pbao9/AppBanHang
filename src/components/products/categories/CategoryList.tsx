@@ -5,6 +5,7 @@ import {
     Text,
     View,
     TouchableOpacity,
+    ActivityIndicator,
 } from 'react-native'
 import { fetchProductCategoryList } from '@/src/services/Product/ProductService'
 import Category from '@/src/types/Category'
@@ -29,7 +30,11 @@ const CategoryList = () => {
     }, [])
 
     if (loading) {
-        return <Text>Loading...</Text>
+        return (
+            <View>
+                <ActivityIndicator size="large" color="#4A90E2" />
+            </View>
+        )
     }
 
     return (

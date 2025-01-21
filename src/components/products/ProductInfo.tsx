@@ -1,20 +1,20 @@
-// ProductInfo.tsx
 import React from 'react'
 import {
     View,
     Text,
     StyleSheet,
     Image,
-    Button,
     TouchableOpacity,
     ScrollView,
     Platform,
+    Linking,
 } from 'react-native'
 import Product from '@/src/types/Product'
 import Topbar from '../partials/Topbar'
 import { useNavigation } from 'expo-router'
-import Feather from '@expo/vector-icons/Feather'
 import Badge from '../partials/Badge'
+import ProductCategory from './ProductCategory'
+import RatingProduct from './rating/RatingProduct'
 
 interface ProductInfoProps {
     product: Product
@@ -25,99 +25,104 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
         ? product.images[0]
         : product.images
     const navigation = useNavigation()
+
+    const handleContact = () => {
+        const url = 'https://zalo.me/0837414353'
+        Linking.openURL(url).catch((err) =>
+            console.error('Failed to open URL:', err)
+        )
+    }
+
     return (
-        <ScrollView>
-            <Topbar title={product.title} />
-            <Image source={{ uri: imageUrl }} style={styles.image} />
-            <View style={styles.content}>
-                <Text style={styles.title}>{product.title}</Text>
-                <Text>SKU: {product.sku}</Text>
-                <View style={styles.tag}>
-                    <Badge
-                        title="Quánh giá"
-                        icon="star"
-                        data={product.rating}
-                    />
-                    <Badge
-                        title="Giảm giá"
-                        icon="percent"
-                        data={product.discountPercentage}
-                    />
-                    <Badge
-                        title="Đặt tối thiểu"
-                        icon="box"
-                        data={product.minimumOrderQuantity}
-                    />
-                    <Badge
-                        title="QuAnh"
-                        icon="box"
-                        data={product.minimumOrderQuantity}
-                    />
-                    <Badge
-                        title="Stock"
-                        icon="box"
-                        data={product.minimumOrderQuantity}
-                    />
-                    <Badge
-                        title="Hel"
-                        icon="box"
-                        data={product.minimumOrderQuantity}
+        <View style={styles.container}>
+            <ScrollView contentContainerStyle={styles.scrollContent}>
+                <Topbar title={product.title} />
+                <Image source={{ uri: imageUrl }} style={styles.image} />
+                <View style={styles.content}>
+                    <Text style={styles.title}>{product.title}</Text>
+                    <View
+                        style={{
+                            paddingHorizontal: 10,
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            flexDirection: 'row',
+                        }}
+                    >
+                        <Text>SKU: {product.sku}</Text>
+                        <Text
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                gap: 10,
+                            }}
+                        >
+                            <Text className="uppercase font-bold">
+                                Danh mục: {product.category}
+                            </Text>
+                        </Text>
+                    </View>
+                    <View style={styles.tag}>
+                        <Badge
+                            title="Quánh giá"
+                            icon="star"
+                            data={product.rating}
+                        />
+                        <Badge
+                            title="Giảm giá"
+                            icon="percent"
+                            data={product.discountPercentage}
+                        />
+                        <Badge
+                            title="Đặt tối thiểu"
+                            icon="box"
+                            data={product.minimumOrderQuantity}
+                        />
+                    </View>
+                    <Text style={styles.description}>
+                        {product.description}
+                    </Text>
+                </View>
+                <View style={styles.section}>
+                    <RatingProduct
+                        productId={product.id}
+                        reviews={product.reviews}
                     />
                 </View>
-                <Text style={styles.description}>{product.description}</Text>
-                <View
-                    className="flex justify-between flex-row"
-                    style={styles.containerFlex}
-                >
-                    <Text style={styles.button}>Liên hệ</Text>
-                    <Text style={styles.button}>${product.price}</Text>
+                <View style={styles.section}>
+                    <Text style={styles.title}>Sản phẩm cùng danh mục</Text>
+                    <ProductCategory category={product.category} />
                 </View>
+            </ScrollView>
+
+            <View style={styles.footer}>
+                <TouchableOpacity style={styles.button} onPress={handleContact}>
+                    <Text style={styles.buttonText}>LIÊN HỆ TƯ VẤN</Text>
+                </TouchableOpacity>
+                <Text style={styles.price}>${product.price}</Text>
             </View>
-        </ScrollView>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
-    icon: {
-        padding: 10,
-        backgroundColor: 'rgba(228, 224, 225, 0.8)',
-        borderRadius: 10,
-    },
-    badge: {
-        display: 'flex',
-        flexDirection: 'row',
-        gap: 5,
-        alignItems: 'center',
-    },
-    tag: {
-        display: 'flex',
-        flexDirection: 'row',
-        gap: 10,
-        flexWrap: 'wrap',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingVertical: 15,
-    },
-
     container: {
         flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
+        backgroundColor: '#f9f9f9',
     },
-    containerFlex: {
-        flex: 1,
-        backgroundColor: 'red',
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
+    section: {
+        padding: 15,
+    },
+    scrollContent: {
+        paddingBottom: 100,
     },
     content: {
         marginTop: Platform.OS === 'ios' ? 110 : 140,
-        padding: 25,
+        padding: 15,
     },
     title: {
         fontSize: 24,
+        textTransform: 'uppercase',
         fontWeight: 'bold',
     },
     description: {
@@ -125,25 +130,43 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginVertical: 8,
     },
+    tag: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        paddingVertical: 15,
+    },
+    image: {
+        width: '100%',
+        height: 270,
+        position: 'absolute',
+        backgroundColor: '#4A90E2',
+    },
+    footer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: 15,
+        backgroundColor: '#ffffff',
+        borderTopWidth: 1,
+        borderColor: '#ddd',
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
+    },
+    button: {
+        padding: 15,
+        backgroundColor: '#4A90E2',
+        borderRadius: 10,
+    },
+    buttonText: {
+        color: 'white',
+        fontWeight: 'bold',
+    },
     price: {
         fontSize: 18,
         fontWeight: 'bold',
         color: '#3d4b5a',
-    },
-    image: {
-        width: '100%',
-        objectFit: 'contain',
-        height: 270,
-        marginBottom: 0,
-        position: 'absolute',
-        backgroundColor: 'red',
-    },
-    button: {
-        padding: 10,
-        backgroundColor: 'red',
-        borderRadius: 10,
-        color: 'white',
-        fontWeight: 'bold',
     },
 })
 
