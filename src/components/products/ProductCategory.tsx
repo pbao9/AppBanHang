@@ -91,6 +91,7 @@ const ProductCategory = ({ category }: { category: string }) => {
                                     width: '100%',
                                     height: 150,
                                     resizeMode: 'cover',
+                                    backgroundColor: '#4A90E2',
                                 }}
                             />
                             <View

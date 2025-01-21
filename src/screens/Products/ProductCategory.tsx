@@ -15,6 +15,7 @@ import { fetchProductsByCategory } from '@/src/services/Product/ProductService'
 import Feather from '@expo/vector-icons/Feather'
 import { useNavigation } from 'expo-router'
 import Products from '@/src/components/products/Product'
+import Topbar from '@/src/components/partials/Topbar'
 
 export default function ProductCategory() {
     const params = useSearchParams()
@@ -62,28 +63,7 @@ export default function ProductCategory() {
 
     return (
         <SafeAreaView>
-            <View style={styles.headerContainer}>
-                <TouchableOpacity
-                    onPress={() => navigation.goBack()}
-                    style={styles.conner}
-                >
-                    <Feather
-                        name="arrow-left"
-                        size={24}
-                        color="black"
-                        style={styles.icon}
-                    />
-                </TouchableOpacity>
-                <Text style={styles.headerTitle}>DANH MỤC : {slug}</Text>
-                <View style={styles.conner}>
-                    <Feather
-                        name="alert-octagon"
-                        size={24}
-                        color="black"
-                        style={styles.icon}
-                    />
-                </View>
-            </View>
+            <Topbar title={`Danh mục sản phẩm: ${slug}`} />
             <View style={styles.section}>
                 <FlatList
                     data={products}

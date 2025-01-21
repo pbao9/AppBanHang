@@ -114,10 +114,11 @@ const styles = StyleSheet.create({
         padding: 15,
     },
     scrollContent: {
+        paddingTop: 30,
         paddingBottom: 100,
     },
     content: {
-        marginTop: Platform.OS === 'ios' ? 110 : 140,
+        marginTop: Platform.OS === 'ios' ? 330 : 350,
         padding: 15,
     },
     title: {
@@ -138,7 +139,7 @@ const styles = StyleSheet.create({
     },
     image: {
         width: '100%',
-        height: 270,
+        height: 450,
         objectFit: 'contain',
         position: 'absolute',
         backgroundColor: '#4A90E2',

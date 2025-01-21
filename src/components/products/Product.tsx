@@ -45,6 +45,7 @@ const Product = ({
         </View>
     )
 }
+
 const styles = StyleSheet.create({
     productCard: {
         flex: 1,
@@ -57,11 +58,12 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 4,
         elevation: 2,
+        width: '48%',
     },
     productImage: {
         width: '100%',
         height: 220,
-        backgroundColor: 'black',
+        backgroundColor: '#4A90E2',
         resizeMode: 'contain',
     },
     productDetails: {

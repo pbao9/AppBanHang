@@ -1,8 +1,27 @@
-import React from 'react'
-import { View, TextInput, StyleSheet } from 'react-native'
+import React, { useState } from 'react'
+import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import Feather from '@expo/vector-icons/Feather'
+import { Link, useRouter } from 'expo-router'
+import { searchProducts } from '@/src/services/Product/ProductService'
 
 const SearchInput = () => {
+    const [searchText, setSearchText] = useState('')
+    const router = useRouter()
+
+    const handleSearch = async () => {
+        if (searchText.trim() === '') return
+
+        try {
+            const results = await searchProducts(searchText)
+            router.push({
+                pathname: '/Products/SearchProduct',
+                params: { results: JSON.stringify(results) },
+            })
+        } catch (error) {
+            console.error('Error during search:', error)
+        }
+    }
+
     return (
         <>
             <View style={styles.container}>
@@ -10,22 +29,27 @@ const SearchInput = () => {
                     style={styles.input}
                     placeholder="Tìm kiếm..."
                     placeholderTextColor="#999"
+                    value={searchText}
+                    onChangeText={setSearchText}
+                    onSubmitEditing={handleSearch}
                 />
-                <Feather
-                    name="search"
-                    size={20}
-                    color="#4A90E2"
-                    style={styles.icon}
-                />
+                <TouchableOpacity onPress={handleSearch}>
+                    <Feather
+                        name="search"
+                        size={20}
+                        color="#4A90E2"
+                        style={styles.icon}
+                    />
+                </TouchableOpacity>
             </View>
-            <Feather
-                name="bell"
-                size={20}
-                color={'#4A90E2'}
+            <Link
+                href={'/Notifications/Notification'}
                 style={{
                     paddingHorizontal: 15,
                 }}
-            />
+            >
+                <Feather name="bell" size={20} color="#4A90E2" />
+            </Link>
         </>
     )
 }

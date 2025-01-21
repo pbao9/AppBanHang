@@ -25,6 +25,19 @@ export default function RootLayout() {
                     headerShown: false,
                 }}
             />
+            <Stack.Screen
+                name="Products/SearchProduct"
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="Notifications/Notification"
+                options={{
+                    headerShown: false,
+                    headerTitle: 'Thông báo',
+                }}
+            />
         </Stack>
     )
 }

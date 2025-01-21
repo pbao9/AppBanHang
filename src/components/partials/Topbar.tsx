@@ -9,11 +9,17 @@ import {
 import { useNavigation } from '@react-navigation/native'
 import Feather from '@expo/vector-icons/Feather'
 
-const Topbar = ({ title }: { title: string }) => {
+const Topbar = ({
+    title,
+    bgColor = 'transparent',
+}: {
+    title: any
+    bgColor: string
+}) => {
     const navigation = useNavigation()
 
     return (
-        <View style={styles.headerContainer}>
+        <View style={[styles.headerContainer, { backgroundColor: bgColor }]}>
             <TouchableOpacity
                 onPress={() => navigation.goBack()}
                 style={styles.conner}
@@ -25,6 +31,7 @@ const Topbar = ({ title }: { title: string }) => {
                     style={styles.icon}
                 />
             </TouchableOpacity>
+            <Text className="font-bold">{title}</Text>
             <View style={styles.conner}>
                 <Feather
                     name="alert-octagon"
@@ -58,7 +65,7 @@ const styles = StyleSheet.create({
     },
     headerContainer: {
         zIndex: 999,
-        height: Platform.OS === 'ios' ? 150 : 120,
+        height: Platform.OS === 'ios' ? 90 : 85,
         width: '100%',
         paddingVertical: 15,
         paddingHorizontal: 15,

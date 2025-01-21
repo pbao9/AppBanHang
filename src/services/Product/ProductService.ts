@@ -66,3 +66,15 @@ export const fetchProductCategoryList = async (): Promise<Category[]> => {
         throw error
     }
 }
+
+export const searchProducts = async (query: string): Promise<Product[]> => {
+    try {
+        const response = await api.get<ProductResponse>(`/products/search`, {
+            params: { q: query },
+        })
+        return response.data.products
+    } catch (error) {
+        console.error('Error searching products:', error)
+        throw error
+    }
+}
