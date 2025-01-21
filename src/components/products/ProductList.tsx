@@ -11,15 +11,7 @@ import {
 import Feather from '@expo/vector-icons/Feather'
 import { fetchProducts } from '../../services/Product/ProductService'
 import { Link } from 'expo-router'
-
-interface Product {
-    id: number
-    title: string
-    description: string
-    price: number
-    thumbnail: string
-    rating: number
-}
+import Product from '@/src/types/Product'
 
 const ProductItem = React.memo(({ item }: { item: Product }) => (
     <View style={styles.productCard}>

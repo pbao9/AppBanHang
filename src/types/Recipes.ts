@@ -1,4 +1,4 @@
-export default interface Recipes {
+export interface Recipes {
     id: number
     name: string
     ingredients: any
@@ -14,4 +14,11 @@ export default interface Recipes {
     rating: number
     reviewCount: number
     mealType: any
+}
+
+export interface RecipesResponse {
+    recipes: Recipes[]
+    total: number
+    skip: number
+    limit: number
 }

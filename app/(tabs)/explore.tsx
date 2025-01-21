@@ -1,12 +1,18 @@
 import RecipesList from '@/src/components/recipes/RecipesList'
-import { Text, View } from 'react-native'
+import { SafeAreaView, Text, View } from 'react-native'
 
 export default function Page() {
     return (
-        <View className="flex justify-center items-center min-h-screen">
-            <Text className="text-red-700 text-2xl font-bold">
+        <SafeAreaView>
+            <View
+                className="flex justify-center items-center min-h-screen"
+                style={{
+                    width: '100%',
+                    padding: 15,
+                }}
+            >
                 <RecipesList />
-            </Text>
-        </View>
+            </View>
+        </SafeAreaView>
     )
 }
