@@ -4,7 +4,7 @@ import { Review } from '@/src/types/Product'
 
 interface RatingProductProps {
     productId: number
-    reviews: Review[] // Nhận danh sách reviews của sản phẩm
+    reviews: Review[]
 }
 
 const RatingProduct: React.FC<RatingProductProps> = ({

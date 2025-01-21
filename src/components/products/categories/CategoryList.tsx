@@ -9,10 +9,12 @@ import {
 } from 'react-native'
 import { fetchProductCategoryList } from '@/src/services/Product/ProductService'
 import Category from '@/src/types/Category'
+import { useRouter } from 'expo-router'
 
 const CategoryList = () => {
     const [categories, setCategories] = useState<Category[]>([])
     const [loading, setLoading] = useState<boolean>(true)
+    const router = useRouter()
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -29,6 +31,10 @@ const CategoryList = () => {
         fetchCategories()
     }, [])
 
+    const handleCategoryPress = (slug: string) => {
+        router.push(`/Products/ProductCategory?slug=${slug}`)
+    }
+
     if (loading) {
         return (
             <View>
@@ -44,6 +50,7 @@ const CategoryList = () => {
                     <TouchableOpacity
                         key={item.slug}
                         style={styles.categoryItem}
+                        onPress={() => handleCategoryPress(item.slug)}
                     >
                         <Text style={styles.categoryName}>{item.name}</Text>
                     </TouchableOpacity>

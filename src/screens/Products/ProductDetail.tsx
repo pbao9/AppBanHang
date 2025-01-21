@@ -1,4 +1,3 @@
-// ProductDetail.tsx
 import {
     View,
     Text,

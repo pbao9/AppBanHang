@@ -17,20 +17,12 @@ export default function RootLayout() {
                 name="Products/ProductDetail"
                 options={{
                     headerShown: false,
-                    // headerTitle: () => (
-                    //     <View
-                    //         style={{
-                    //             flex: 1,
-                    //             justifyContent: 'center',
-                    //             alignItems: 'center',
-                    //         }}
-                    //     >
-                    //         <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
-                    //             Chi tiết sản phẩm
-                    //         </Text>
-                    //     </View>
-                    // ),
-                    // headerRight: () => <Feather name="info" size={16} />,
+                }}
+            />
+            <Stack.Screen
+                name="Products/ProductCategory"
+                options={{
+                    headerShown: false,
                 }}
             />
         </Stack>
