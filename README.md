@@ -51,10 +51,4 @@ yarn start
     <li>
         Hiển thị chi tiết sản phẩm: Khi người dùng chọn một sản phẩm, ứng dụng sẽ hiển thị chi tiết thông tin sản phẩm như tên, giá cả, xếp hạng và hình ảnh.
     <li>
-    <li>
-         Điều hướng giữa các màn hình: Ứng dụng sử dụng React Navigation để điều hướng giữa các màn hình.
-    <li>
-    <li>
-         Chức năng Thông báo: Thông báo về sản phẩm mới hoặc khuyến mãi sẽ hiển thị cho người dùng.
-    <li>
 </ul>
